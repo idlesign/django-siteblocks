@@ -1,0 +1,67 @@
+# Django SiteBlocks Russian translation.
+# This file is distributed under the same license as the django-siteblocks package.
+# Igor 'idle sign' Starikov <idlesign@yandex.ru>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: SiteBlocks\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-06-08 18:03+0700\n"
+"PO-Revision-Date: 2010-06-08 18:14+0700\n"
+"Last-Translator: Igor 'idle sign' Starikov <idlesign@yandex.ru>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: models.py:6
+msgid "Alias"
+msgstr "Псевдоним"
+
+#: models.py:6
+msgid "Short name to address this block from a template."
+msgstr "Короткое имя для обращения к блоку из шаблонов."
+
+#: models.py:7
+msgid "Description"
+msgstr "Описание"
+
+#: models.py:7
+msgid "Short memo for this block."
+msgstr "Справочная информация о блоке (чтобы не забыть, что это за блок)."
+
+#: models.py:8
+msgid "URL"
+msgstr "URL"
+
+#: models.py:8
+msgid "Page URL this block is related to. Regular expressions supported (e.g.: \"/news.*\" &#8212; everything under \"/news\").<br /><b>Reserved URL alias:</b> \"*\" &#8212; every page."
+msgstr "URL для которого используется блок. Поддерживаются регулярные выражения (н.п.: \"/news.*\" &#8212; всё, что под адресом \"/news\").<br /><b>Зарезервированный URL-псевдоним:</b> \"*\" &#8212; блок для всех страниц."
+
+#: models.py:9
+msgid "Contents"
+msgstr "Содержимое"
+
+#: models.py:9
+msgid "Block contents to render in a template."
+msgstr "Содержимое блока для вывода на странице."
+
+#: models.py:10
+msgid "Hidden"
+msgstr "Скрыт"
+
+#: models.py:10
+msgid "Whether to show this block when requested."
+msgstr "Определяет, следует ли отображать этот блок в случае его запроса."
+
+#: models.py:13
+msgid "Site Block"
+msgstr "Блок сайта"
+
+#: models.py:14
+msgid "Site Blocks"
+msgstr "Блоки сайта"
+
