@@ -3,7 +3,7 @@ import re
 from django import template
 from django.db.models import signals
 
-from ..siteblocks.models import Block
+from ..models import Block
 
 register = template.Library()
 

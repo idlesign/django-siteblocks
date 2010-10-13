@@ -2,7 +2,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib import admin
 from django.contrib import messages
 
-from siteblocks.models import Block
+from models import Block
 
 class BlockAdmin(admin.ModelAdmin):
     list_display = ('alias', 'description', 'url', 'hidden')
