@@ -1,6 +1,9 @@
-SiteBlocks for Django
-=======================================
+djangp-siteblocks
+=================
 http://github.com/idlesign/django-siteblocks
+
+.. image:: https://pypip.in/d/django-siteblocks/badge.png
+        :target: https://crate.io/packages/django-siteblocks
 
 What's that
 -----------
