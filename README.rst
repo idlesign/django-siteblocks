@@ -29,3 +29,9 @@ Translating django-siteblocks
 -----------------------------
 You can translate application into your language if it is supported by Django.  
 For translation tips refer to Django documentation: http://docs.djangoproject.com/en/1.1/topics/i18n/localization/
+
+
+
+.. image:: https://d2weczhvl823v0.cloudfront.net/idlesign/django-siteblocks/trend.png
+        :target: https://bitdeli.com/free
+        
