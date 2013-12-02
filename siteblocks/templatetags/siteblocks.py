@@ -1,96 +1,66 @@
-import re
-
 from django import template
-from django.db.models import signals
 
-from ..models import Block
+from ..siteblocksapp import SiteBlocks
 
 register = template.Library()
 
-class BlocksCache():
-    
-    def __init__(self):
-        self.cache_blocks = {}
-        signals.post_save.connect(self.cache_empty, sender=Block)
-        signals.post_delete.connect(self.cache_empty, sender=Block)
-        
-    def cache_empty(self, **kwargs):
-        self.cache_blocks = {}
-        
-mycache = BlocksCache()
+# Utility methods are implemented in SiteBlocks class
+siteblocks = SiteBlocks()
+
 
 @register.tag
 def siteblock(parser, token):
-    """Parses siteblock tag parameters.
-    
-    Two notation types are possible:
+    """Two notation types are acceptable:
+
         1. Two arguments:
            {% siteblock "myblock" %}
            Used to render "myblock" site block.
            
         2. Four arguments:
            {% siteblock "myblock" as myvar %}
-           Used to render "myblock" site block into variable "myvar".
+           Used to put "myblock" site block into "myvar" template variable.
            
     """
     tokens = token.split_contents()
-    
-    as_var = None
-    if 'as' in tokens:
-        tindex = tokens.index('as')
-        as_var = tokens[tindex+1]
-        del tokens [tindex:tindex+2]
+    as_var = detect_clause(parser, 'as', tokens)
+    tokens_num = len(tokens)
 
-    tokensNum = len(tokens)
-
-    if tokensNum == 2:
-        block_alias = tokens[1][1:-1].strip()
+    if tokens_num in (2, 4):
+        block_alias = parser.compile_filter(tokens[1])
         return siteblockNode(block_alias, as_var)    
     else:
         raise template.TemplateSyntaxError, "%r tag requires two or four arguments. E.g.: {%% siteblock \"myblock\" %%} or {%% siteblock \"myblock\" as myvar %%}." % tokens[0]
 
+
 class siteblockNode(template.Node):
-    """Renders specified site block."""
+
     def __init__(self, block_alias, as_var=None):
         self.block_alias = block_alias
         self.as_var = as_var
         
     def render(self, context):
-        
         block_alias = self.block_alias
-        if block_alias.find(' ') == -1:
-            try:
-                block_alias = template.Variable(block_alias).resolve(context) 
-            except template.VariableDoesNotExist:
-                pass
+        if isinstance(self.block_alias, template.FilterExpression):
+            block_alias = block_alias.resolve(context)
 
-        if 'request' in context:
-            current_url = context['request'].path
-        else:
-            current_url = ''
-            
-        contents = ''
-        
-        if block_alias not in mycache.cache_blocks: 
-            mycache.cache_blocks[block_alias] = {}
-            blocks = Block.objects.filter(alias=block_alias, hidden=False).only('url', 'contents')
-            for block in blocks:
-                if block.url != '*':
-                    url_re = re.compile(r'%s' % block.url)
-                else:
-                    url_re = block.url
-                mycache.cache_blocks[block_alias][url_re] = block.contents
+        contents = siteblocks.get(block_alias, context)
 
-        if mycache.cache_blocks[block_alias].has_key('*'):
-            contents = mycache.cache_blocks[block_alias]['*']
-        else:
-            for url in mycache.cache_blocks[block_alias]:
-                if url.match(current_url):
-                    contents = mycache.cache_blocks[block_alias][url]
-                    break
-        
         if self.as_var is not None:
             context[self.as_var] = contents
             return ''
-        else:
-            return contents
+
+        return contents
+
+
+def detect_clause(parser, clause_name, tokens):
+    """Helper function detects a certain clause in tag tokens list.
+    Returns its value.
+
+    """
+    if clause_name in tokens:
+        t_index = tokens.index(clause_name)
+        clause_value = parser.compile_filter(tokens[t_index + 1])
+        del tokens[t_index:t_index + 2]
+    else:
+        clause_value = None
+    return clause_value
