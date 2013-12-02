@@ -8,8 +8,8 @@ f.close()
 
 setup(
     name='django-siteblocks',
-    version=".".join(map(str, VERSION)),
-    description='Reusable application for Django introducing URL-dependent static data blocks (flatblocks).',
+    version='.'.join(map(str, VERSION)),
+    description='Reusable application for Django introducing URL-dependent static and dynamic data blocks',
     long_description=readme,
     author="Igor 'idle sign' Starikov",
     author_email='idlesign@yandex.ru',
@@ -18,12 +18,16 @@ setup(
     include_package_data=True,
     zip_safe=False,
     classifiers=[
-	'Development Status :: 4 - Beta',
+	    'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
         'Framework :: Django',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.3',
     ],
 )
