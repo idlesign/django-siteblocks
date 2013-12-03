@@ -8,17 +8,58 @@ from django.db.models import signals
 
 from .models import Block
 
-# TODO dynamic blocks
-# TODO + helper class (template rendering)
-# TODO + context as input arg
-# TODO + arbitrary dynamic block caching
-# TODO + autodiscovery
-
 
 # siteblocks objects are stored in Django cache for a year (60 * 60 * 24 * 365 = 31536000 sec).
 # Cache is only invalidated on block item change.
 CACHE_TIMEOUT = 31536000
 CACHE_KEY = 'siteblocks'
+
+# Holds dynamic blocks.
+_DYNAMIC_BLOCKS = defaultdict(list)
+
+
+def register_dynamic_block(alias, callable):
+    """Registers a callable that produces contents for a dynamic block.
+
+    Callable on call will get the following kwargs:
+
+        * `block_alias` - block alias,
+        * `block_context` - template context for block
+
+    Example::
+
+        # Put the following code somewhere where it'd be triggered as expected. E.g. in app view.py.
+
+        from random import choice
+        # Import the register function.
+        from siteblocks.siteblocksapp import register_dynamic_block
+
+
+        # The following function will be used as a block contents producer.
+        def get_quote(**kwargs):
+            quotes = [  # From Terry Pratchett's Discworld novels.
+                'Ripples of paradox spread out across the sea of causality.',
+                'Early to rise, early to bed, makes a man healthy, wealthy and dead.',
+                'Granny had nothing against fortune-telling provided it was done badly by people with no talent for it.',
+                'Take it from me, there\'s nothing more terrible than someone out to do the world a favour.',
+                'The duke had a mind that ticked like a clock and, like a clock, it regularly went cuckoo.',
+                'Most gods find it hard to walk and think at the same time.',
+                'They didn\'t have to be funny - they were father jokes',
+                'Speak softly and employ a huge man with a crowbar.',
+            ]
+            return choice(quotes)
+
+        # And we register items processor.
+        register_dynamic_block('quote', get_quote)
+
+    """
+    global _DYNAMIC_BLOCKS
+    _DYNAMIC_BLOCKS[alias].append(callable)
+
+
+def get_dynamic_blocks():
+    """Returns a dictionary with currently registered dynamic blocks."""
+    return _DYNAMIC_BLOCKS
 
 
 class SiteBlocks(object):
@@ -90,18 +131,31 @@ class SiteBlocks(object):
             self._cache_set(block_alias, re_index)
         self._cache_save()
 
-        resulting_contents = ''
+        static_block_contents = ''
         if '*' in siteblocks_static:
-            resulting_contents = choice(siteblocks_static['*'])
+            static_block_contents = choice(siteblocks_static['*'])
         elif resolved_view_name in siteblocks_static:
-            resulting_contents = choice(siteblocks_static[resolved_view_name])
+            static_block_contents = choice(siteblocks_static[resolved_view_name])
         else:
             for url, contents in siteblocks_static.items():
                 if url.match(current_url):
-                    resulting_contents = choice(contents)
+                    static_block_contents = choice(contents)
                     break
 
-        return resulting_contents
+        contents = []
+
+        dynamic_block = get_dynamic_blocks().get(block_alias, [])
+        if dynamic_block:
+            dynamic_block = choice(dynamic_block)
+            contents.append(dynamic_block(block_alias=block_alias, block_context=context))
+
+        if static_block_contents:
+            contents.append(static_block_contents)
+
+        if not contents:
+            return ''
+
+        return choice(contents)
 
 
 class SiteBlocksError(Exception):

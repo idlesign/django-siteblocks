@@ -1,9 +1,11 @@
+from random import choice
+
 from django.utils import unittest
 from django import template
 from django.core import urlresolvers
 
 from siteblocks.models import Block
-from siteblocks.siteblocksapp import SiteBlocks, SiteBlocksError
+from siteblocks.siteblocksapp import SiteBlocks, SiteBlocksError, register_dynamic_block
 
 from django.conf.urls import patterns, url, include
 
@@ -36,6 +38,22 @@ urlpatterns = patterns('',
 def get_mock_context(app=None, path=None, user_authorized=False):
     ctx = template.Context({'request': MockRequest(path, user_authorized)}, current_app=app)
     return ctx
+
+
+QUOTES = [  # From Terry Pratchett's Discworld novels.
+    'Ripples of paradox spread out across the sea of causality.',
+    'Early to rise, early to bed, makes a man healthy, wealthy and dead.',
+    'Granny had nothing against fortune-telling provided it was done badly by people with no talent for it.',
+    'Take it from me, there\'s nothing more terrible than someone out to do the world a favour.',
+    'The duke had a mind that ticked like a clock and, like a clock, it regularly went cuckoo.',
+    'Most gods find it hard to walk and think at the same time.',
+    'They didn\'t have to be funny - they were father jokes',
+    'Speak softly and employ a huge man with a crowbar.',
+]
+
+
+def get_quote(**kwargs):
+    return choice(QUOTES)
 
 
 class TreeItemModelTest(unittest.TestCase):
@@ -122,3 +140,8 @@ class TreeItemModelTest(unittest.TestCase):
 
         contents = self.siteblocks.get(self.b8.alias, get_mock_context(path='/namespace/my_another_named_url/'))
         self.assertEqual(contents, self.b8.contents)
+
+    def test_dynamic(self):
+        register_dynamic_block('quotes', get_quote)
+        contents = self.siteblocks.get('quotes', get_mock_context(path='/somewhere/'))
+        self.assertIn(contents, QUOTES)
