@@ -1,0 +1,19 @@
+v0.2.0
+------
++ Added Python 3 support.
++ Added South support.
++ Added Django Cache framework support.
++ Added dynamic blocks support.
++ Added named URLs support in static blocks URLs.
++ Added block content randomizer.
+
+
+v0.1.1
+------
++ Now PyPI ready.
+* Module imports.
+
+
+v0.1.0
+------
++ Basic siteblocks functionality.
