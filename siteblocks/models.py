@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
 
+# TODO Fix texts.
 
 @python_2_unicode_compatible
 class Block(models.Model):
