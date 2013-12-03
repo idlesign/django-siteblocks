@@ -1,0 +1,70 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-12-03 23:40+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: models.py:9
+msgid "Alias"
+msgstr ""
+
+#: models.py:9
+msgid "Short name to address this block from a template."
+msgstr ""
+
+#: models.py:10
+msgid "Description"
+msgstr ""
+
+#: models.py:10
+msgid "Short memo for this block."
+msgstr ""
+
+#: models.py:11
+msgid "URL"
+msgstr ""
+
+#: models.py:11
+msgid ""
+"Page URL this block is related to. Regular expressions supported (e.g.: \"/"
+"news.*\" &#8212; everything under \"/news\").<br />View names are supported: "
+"prepend <b>:</b> to view name <br /><b>Reserved URL alias:</b> \"*\" &#8212; "
+"every page."
+msgstr ""
+
+#: models.py:12
+msgid "Contents"
+msgstr ""
+
+#: models.py:12
+msgid "Block contents to render in a template."
+msgstr ""
+
+#: models.py:13
+msgid "Hidden"
+msgstr ""
+
+#: models.py:13
+msgid "Whether to show this block when requested."
+msgstr ""
+
+#: models.py:16
+msgid "Site Block"
+msgstr ""
+
+#: models.py:17
+msgid "Site Blocks"
+msgstr ""
