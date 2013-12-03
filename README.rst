@@ -16,13 +16,13 @@ that could be rendered in certain places on site pages. These blocks are address
 
 Two siteblock types are supported:
 
-    * *Static.* Those are defined using Django Admin contrib and are linked to certain URLs.
+* *Static.* Those are defined using Django Admin contrib and are linked to certain URLs.
 
-      This allows different siteblock contents on different URLs.
+  This allows different siteblock contents on different URLs.
 
-    * *Dynamic.* Those are ordinary Python functions registered as siteblocks returning contents.
+* *Dynamic.* Those are ordinary Python functions registered as siteblocks returning contents.
 
-      This allows complex logic to build siteblock contents.
+  This allows complex logic to build siteblock contents.
 
 
 If one and the same siteblock has more than one content associated with it, rendered content will be chosen randomly.
