@@ -94,10 +94,6 @@ class TreeItemModelTest(unittest.TestCase):
     def tearDownClass(cls):
         urlresolvers.set_urlconf(cls.old_urlconf)
 
-    def test_context_proc_required(self):
-        context = template.Context()
-        self.assertRaises(SiteBlocksError, self.siteblocks.get, 'main', context)
-
     def test_static_notalias(self):
 
         contents = self.siteblocks.get('notalias', get_mock_context(path='/root/'))

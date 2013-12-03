@@ -91,10 +91,11 @@ class SiteBlocks(object):
         self._cache = None
         cache.delete(CACHE_KEY)
 
-    def get(self, block_alias, context):
+    def get_contents_static(self, block_alias, context):
+
         if 'request' not in context:
             # No use in further actions as we won't ever know current URL.
-            raise SiteBlocksError('Siteblocks requires "django.core.context_processors.request" to be in TEMPLATE_CONTEXT_PROCESSORS in your settings file. If it is, check that your view pushes request data into the template.')
+            return ''
 
         current_url = context['request'].path
 
@@ -142,13 +143,24 @@ class SiteBlocks(object):
                     static_block_contents = choice(contents)
                     break
 
+        return static_block_contents
+
+    def get_contents_dynamic(self, block_alias, context):
+        dynamic_block = get_dynamic_blocks().get(block_alias, [])
+        if not dynamic_block:
+            return ''
+
+        dynamic_block = choice(dynamic_block)
+        return dynamic_block(block_alias=block_alias, block_context=context)
+
+    def get(self, block_alias, context):
         contents = []
 
-        dynamic_block = get_dynamic_blocks().get(block_alias, [])
-        if dynamic_block:
-            dynamic_block = choice(dynamic_block)
-            contents.append(dynamic_block(block_alias=block_alias, block_context=context))
+        dynamic_block_contents = self.get_contents_dynamic(block_alias, context)
+        if dynamic_block_contents:
+            contents.append(dynamic_block_contents)
 
+        static_block_contents = self.get_contents_static(block_alias, context)
         if static_block_contents:
             contents.append(static_block_contents)
 
