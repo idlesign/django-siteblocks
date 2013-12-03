@@ -1,67 +1,71 @@
-# Django SiteBlocks Russian translation.
-# This file is distributed under the same license as the django-siteblocks package.
-# Igor 'idle sign' Starikov <idlesign@yandex.ru>, 2010.
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Igor Starikov <idlesign@yandex.ru>, 2013
 msgid ""
 msgstr ""
-"Project-Id-Version: SiteBlocks\n"
+"Project-Id-Version: django-siteblocks\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-08 18:03+0700\n"
-"PO-Revision-Date: 2010-06-08 18:14+0700\n"
-"Last-Translator: Igor 'idle sign' Starikov <idlesign@yandex.ru>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2013-12-03 23:40+0700\n"
+"PO-Revision-Date: 2013-12-03 16:53+0000\n"
+"Last-Translator: Igor Starikov <idlesign@yandex.ru>\n"
+"Language-Team: Russian (http://www.transifex.com/projects/p/django-siteblocks/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Poedit-Language: Russian\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: models.py:6
+#: models.py:9
 msgid "Alias"
 msgstr "Псевдоним"
 
-#: models.py:6
+#: models.py:9
 msgid "Short name to address this block from a template."
-msgstr "Короткое имя для обращения к блоку из шаблонов."
+msgstr "Краткое имя блока, для обращения к нему из шаблонов."
 
-#: models.py:7
+#: models.py:10
 msgid "Description"
 msgstr "Описание"
 
-#: models.py:7
+#: models.py:10
 msgid "Short memo for this block."
-msgstr "Справочная информация о блоке (чтобы не забыть, что это за блок)."
+msgstr "Произвольная заметка для блока."
 
-#: models.py:8
+#: models.py:11
 msgid "URL"
 msgstr "URL"
 
-#: models.py:8
-msgid "Page URL this block is related to. Regular expressions supported (e.g.: \"/news.*\" &#8212; everything under \"/news\").<br /><b>Reserved URL alias:</b> \"*\" &#8212; every page."
-msgstr "URL для которого используется блок. Поддерживаются регулярные выражения (н.п.: \"/news.*\" &#8212; всё, что под адресом \"/news\").<br /><b>Зарезервированный URL-псевдоним:</b> \"*\" &#8212; блок для всех страниц."
+#: models.py:11
+msgid ""
+"Page URL this block is related to. Regular expressions supported (e.g.: "
+"\"/news.*\" &#8212; everything under \"/news\").<br />View names are "
+"supported: prepend <b>:</b> to view name <br /><b>Reserved URL alias:</b> "
+"\"*\" &#8212; every page."
+msgstr "URL страницы, для которой актуален блок. Поддерживаются регулярные выражения (например, \"/news.*\" &#8212; любые страницы ниже \"/news\").<br />Поддерживаются обращения к представлениям: добавьте <b>:</b> перед именем представления<br /><b>Зарезервированный псевдоним URL:</b> \"*\" &#8212; любая страница."
 
-#: models.py:9
+#: models.py:12
 msgid "Contents"
 msgstr "Содержимое"
 
-#: models.py:9
+#: models.py:12
 msgid "Block contents to render in a template."
-msgstr "Содержимое блока для вывода на странице."
+msgstr "Содержимое блока для вывода на страницах."
 
-#: models.py:10
+#: models.py:13
 msgid "Hidden"
 msgstr "Скрыт"
 
-#: models.py:10
-msgid "Whether to show this block when requested."
-msgstr "Определяет, следует ли отображать этот блок в случае его запроса."
-
 #: models.py:13
+msgid "Whether to show this block when requested."
+msgstr "Определяет, можно ли выводить этот блок."
+
+#: models.py:16
 msgid "Site Block"
 msgstr "Блок сайта"
 
-#: models.py:14
+#: models.py:17
 msgid "Site Blocks"
 msgstr "Блоки сайта"
-
