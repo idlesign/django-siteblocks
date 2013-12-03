@@ -8,38 +8,34 @@ http://github.com/idlesign/django-siteblocks
 
 What's that
 -----------
-django-siteblocks is a reusable application for Django introducing to build blocks of static or dynamic data that could be used in templates.
 
-These blocks are rendered in templates with different contents depending on current URL.
+*django-siteblocks is a reusable application for Django to build blocks of static or dynamic data that could be used in templates.*
 
+It allows you to describe data that doesn't clearly belong to any application in your project in terms of static or dynamic blocks,
+that could be rendered in certain places on site pages. These blocks are addressed in templates by their aliases.
 
-Requirements
-------------
-1. Python 2.7+ or 3.3+
-2. Django 1.4+
-3. Django Admin contrib enabled (optional)
-4. South (for automatic DB migrations)
+Two siteblock types are supported:
 
+    * *Static.* Those are defined using Django Admin contrib and are linked to certain URLs.
 
-How to use
-----------
+      This allows different siteblock contents on different URLs.
 
-1. Add the `siteblocks` application to `INSTALLED_APPS` in your settings file (usually `settings.py`).
-2. Run `./manage.py migrate` to install siteblocks table into database.
-3. Go to Django Admin site and add some site blocks.
-4. Add '{% load siteblocks %}' tag to the top of a template.
-5. Add '{% siteblock "myblock" %}' tag where you need it in template. Here ``myblock`` is the alias of a block.
+    * *Dynamic.* Those are ordinary Python functions registered as siteblocks returning contents.
 
-Use '{% siteblock "myblock" as myvar %}' tag notation to put block contents into `myvar` variable instead of rendering.
+      This allows complex logic to build siteblock contents.
 
 
-Translating django-siteblocks
------------------------------
-You can translate application into your language if it is supported by Django.  
-For translation tips refer to Django documentation: http://docs.djangoproject.com/en/1.1/topics/i18n/localization/
+If one and the same siteblock has more than one content associated with it, rendered content will be chosen randomly.
+
+Yeah, you're right, that could be used to render random quotes on your site.
+
+
+Documentation
+-------------
+
+http://django-siteblocks.readthedocs.org/
 
 
 
 .. image:: https://d2weczhvl823v0.cloudfront.net/idlesign/django-siteblocks/trend.png
         :target: https://bitdeli.com/free
-        

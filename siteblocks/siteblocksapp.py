@@ -49,7 +49,7 @@ def register_dynamic_block(alias, callable):
             ]
             return choice(quotes)
 
-        # And we register items processor.
+        # And we register our siteblock.
         register_dynamic_block('quote', get_quote)
 
     """
