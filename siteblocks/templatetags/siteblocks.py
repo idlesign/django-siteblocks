@@ -22,14 +22,18 @@ def siteblock(parser, token):
            
     """
     tokens = token.split_contents()
-    as_var = detect_clause(parser, 'as', tokens)
     tokens_num = len(tokens)
 
-    if tokens_num in (2, 4):
-        block_alias = parser.compile_filter(tokens[1])
-        return siteblockNode(block_alias, as_var)    
-    else:
-        raise template.TemplateSyntaxError, "%r tag requires two or four arguments. E.g.: {%% siteblock \"myblock\" %%} or {%% siteblock \"myblock\" as myvar %%}." % tokens[0]
+    if tokens_num not in (2, 4):
+        raise template.TemplateSyntaxError("%r tag requires two or four arguments. E.g.: {%% siteblock \"myblock\" %%} or {%% siteblock \"myblock\" as myvar %%}." % tokens[0])
+
+    block_alias = parser.compile_filter(tokens[1])
+    as_var = None
+    tokens = tokens[2:]
+    if len(tokens) >= 2 and tokens[-2] == 'as':
+        as_var = tokens[-1]
+
+    return siteblockNode(block_alias, as_var)
 
 
 class siteblockNode(template.Node):
@@ -50,17 +54,3 @@ class siteblockNode(template.Node):
             return ''
 
         return contents
-
-
-def detect_clause(parser, clause_name, tokens):
-    """Helper function detects a certain clause in tag tokens list.
-    Returns its value.
-
-    """
-    if clause_name in tokens:
-        t_index = tokens.index(clause_name)
-        clause_value = parser.compile_filter(tokens[t_index + 1])
-        del tokens[t_index:t_index + 2]
-    else:
-        clause_value = None
-    return clause_value
