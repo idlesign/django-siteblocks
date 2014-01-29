@@ -32,6 +32,11 @@ Let's say we need random quotes block.
         {% endblock %}
 
 
+    .. note::
+
+       You can use `{% siteblock "my_quotes" as my_var %}` tag variation to put block contents into a template context variable.
+
+
 2. Go to Django Admin site and add several siteblocks with quotes aliased `my_quotes`.
 
    *Note that you can render different sets of quotes on different pages (URLs or views).*
