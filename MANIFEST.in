@@ -8,3 +8,6 @@ recursive-include docs .py
 recursive-include siteblocks/locale *
 recursive-include siteblocks/migrations .py
 recursive-include siteblocks/templatetags *
+
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
