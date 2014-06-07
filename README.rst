@@ -2,6 +2,9 @@ django-siteblocks
 =================
 http://github.com/idlesign/django-siteblocks
 
+.. image:: https://badge.fury.io/py/django-siteblocks.png
+    :target: http://badge.fury.io/py/django-siteblocks
+
 .. image:: https://pypip.in/d/django-siteblocks/badge.png
         :target: https://crate.io/packages/django-siteblocks
 
@@ -34,8 +37,3 @@ Documentation
 -------------
 
 http://django-siteblocks.readthedocs.org/
-
-
-
-.. image:: https://d2weczhvl823v0.cloudfront.net/idlesign/django-siteblocks/trend.png
-        :target: https://bitdeli.com/free
