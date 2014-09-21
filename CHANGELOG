@@ -1,6 +1,14 @@
 django-siteblocks changelog
 ===========================
 
+
+v0.3.0
+------
++ Django 1.7 ready.
++ Implemented simple access control for static blocks.
++ Added French loco.
+
+
 v0.2.1
 ------
 * Fixed import for Admin contrib.
