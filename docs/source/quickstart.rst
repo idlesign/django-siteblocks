@@ -4,8 +4,19 @@ Getting started
 .. _tag-quickstart:
 
 * Add the **siteblocks** application to INSTALLED_APPS in your settings file (usually 'settings.py').
-* Run `./manage.py migrate` as needed to install up-to-date siteblocks tables into database.
+* Use ``> python manage.py syncdb`` command to install app tables int DB (``> python manage.py migrate`` for Django 1.7+)
 * Make sure `TEMPLATE_CONTEXT_PROCESSORS` in your settings file has `django.core.context_processors.request` if you want to use static blocks created in Django Admin.
+
+.. warning::
+
+    Those, who are using South <1.0 for migrations with Django <1.7, add this into settings file:
+
+    .. code-block:: python
+
+        SOUTH_MIGRATION_MODULES = {
+            'siteblocks': 'siteblocks.south_migrations',
+        }
+
 
 
 Quick example
