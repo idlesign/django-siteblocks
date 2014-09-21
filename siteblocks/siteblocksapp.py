@@ -1,6 +1,6 @@
 import re
-from random import choice
 from collections import defaultdict
+from random import choice
 
 from django.core.cache import cache
 from django.core.urlresolvers import resolve, Resolver404
@@ -8,11 +8,6 @@ from django.db.models import signals
 
 from .models import Block
 
-
-# siteblocks objects are stored in Django cache for a year (60 * 60 * 24 * 365 = 31536000 sec).
-# Cache is only invalidated on block item change.
-CACHE_TIMEOUT = 31536000
-CACHE_KEY = 'siteblocks'
 
 # Holds dynamic blocks.
 _DYNAMIC_BLOCKS = defaultdict(list)
@@ -64,6 +59,13 @@ def get_dynamic_blocks():
 
 class SiteBlocks(object):
 
+    # siteblocks objects are stored in Django cache for a year (60 * 60 * 24 * 365 = 31536000 sec).
+    # Cache is only invalidated on block item change.
+    CACHE_TIMEOUT = 31536000
+    CACHE_KEY = 'siteblocks'
+    IDX_GUEST = 0
+    IDX_AUTH = 1
+
     def __init__(self):
         self._cache = None
         signals.post_save.connect(self._cache_empty, sender=Block)
@@ -71,13 +73,13 @@ class SiteBlocks(object):
 
     def _cache_init(self):
         """Initializes local cache from Django cache."""
-        cache_ = cache.get(CACHE_KEY)
+        cache_ = cache.get(self.CACHE_KEY)
         if cache_ is None:
             cache_ = defaultdict(dict)
         self._cache = cache_
 
     def _cache_save(self):
-        cache.set(CACHE_KEY, self._cache, CACHE_TIMEOUT)
+        cache.set(self.CACHE_KEY, self._cache, self.CACHE_TIMEOUT)
 
     def _cache_get(self, key):
         """Returns cache entry parameter value by its name."""
@@ -89,7 +91,7 @@ class SiteBlocks(object):
 
     def _cache_empty(self, **kwargs):
         self._cache = None
-        cache.delete(CACHE_KEY)
+        cache.delete(self.CACHE_KEY)
 
     def get_contents_static(self, block_alias, context):
 
@@ -115,7 +117,7 @@ class SiteBlocks(object):
         siteblocks_static = self._cache_get(block_alias)
         if not siteblocks_static:
             blocks = Block.objects.filter(alias=block_alias, hidden=False).only('url', 'contents')
-            re_index = defaultdict(list)
+            siteblocks_static = [defaultdict(list), defaultdict(list)]
             for block in blocks:
                 if block.url == '*':
                     url_re = block.url
@@ -126,19 +128,31 @@ class SiteBlocks(object):
                         url_re = ':%s' % url_re
                 else:
                     url_re = re.compile(r'%s' % block.url)
-                re_index[url_re].append(block.contents)
 
-            siteblocks_static = re_index
-            self._cache_set(block_alias, re_index)
+                if block.access_guest:
+                    siteblocks_static[self.IDX_GUEST][url_re].append(block.contents)
+                elif block.access_loggedin:
+                    siteblocks_static[self.IDX_AUTH][url_re].append(block.contents)
+                else:
+                    siteblocks_static[self.IDX_GUEST][url_re].append(block.contents)
+                    siteblocks_static[self.IDX_AUTH][url_re].append(block.contents)
+
+            self._cache_set(block_alias, siteblocks_static)
         self._cache_save()
 
-        static_block_contents = ''
-        if '*' in siteblocks_static:
-            static_block_contents = choice(siteblocks_static['*'])
-        elif resolved_view_name in siteblocks_static:
-            static_block_contents = choice(siteblocks_static[resolved_view_name])
+        user = context['request'].user
+        if user.is_authenticated():
+            lookup_area = siteblocks_static[self.IDX_AUTH]
         else:
-            for url, contents in siteblocks_static.items():
+            lookup_area = siteblocks_static[self.IDX_GUEST]
+
+        static_block_contents = ''
+        if '*' in lookup_area:
+            static_block_contents = choice(lookup_area['*'])
+        elif resolved_view_name in lookup_area:
+            static_block_contents = choice(lookup_area[resolved_view_name])
+        else:
+            for url, contents in lookup_area.items():
                 if url.match(current_url):
                     static_block_contents = choice(contents)
                     break

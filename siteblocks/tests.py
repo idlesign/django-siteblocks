@@ -86,6 +86,12 @@ class TreeItemModelTest(unittest.TestCase):
         cls.b8 = Block(alias='named_2', url=':namespaced:url', contents='named_2_1')
         cls.b8.save(force_insert=True)
 
+        cls.b9 = Block(alias='access_filter', url='*', contents='afilter_auth', access_loggedin=True)
+        cls.b9.save(force_insert=True)
+
+        cls.b10 = Block(alias='access_filter', url='*', contents='afilter_guest', access_guest=True)
+        cls.b10.save(force_insert=True)
+
         # set urlconf to one from test
         cls.old_urlconf = urlresolvers.get_urlconf()
         urlresolvers.set_urlconf('siteblocks.tests')
@@ -141,3 +147,10 @@ class TreeItemModelTest(unittest.TestCase):
         register_dynamic_block('quotes', get_quote)
         contents = self.siteblocks.get('quotes', get_mock_context(path='/somewhere/'))
         self.assertIn(contents, QUOTES)
+
+    def test_static_access_filters(self):
+        contents = self.siteblocks.get(self.b9.alias, get_mock_context(path='/some/'))
+        self.assertEqual(contents, self.b10.contents)
+
+        contents = self.siteblocks.get(self.b9.alias, get_mock_context(path='/some/', user_authorized=True))
+        self.assertEqual(contents, self.b9.contents)
