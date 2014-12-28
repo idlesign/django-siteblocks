@@ -1,0 +1,3 @@
+[run]
+include = siteblocks/*
+omit = siteblocks/migrations/*, siteblocks/south_migrations/*, siteblocks/runtests.py, siteblocks/tests.py, siteblocks/config.py, siteblocks/admin.py

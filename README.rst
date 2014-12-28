@@ -8,6 +8,12 @@ http://github.com/idlesign/django-siteblocks
 .. image:: https://pypip.in/d/django-siteblocks/badge.png
         :target: https://crate.io/packages/django-siteblocks
 
+.. image:: https://coveralls.io/repos/idlesign/django-siteblocks/badge.png
+    :target: https://coveralls.io/r/idlesign/django-siteblocks
+
+.. image:: https://travis-ci.org/idlesign/django-siteblocks.svg?branch=master
+    :target: https://travis-ci.org/idlesign/django-siteblocks
+
 
 What's that
 -----------
@@ -29,8 +35,6 @@ Two siteblock types are supported:
 
 
 If one and the same siteblock has more than one content associated with it, rendered content will be chosen randomly.
-
-Yeah, you're right, that could be used to render random quotes on your site.
 
 
 Documentation
