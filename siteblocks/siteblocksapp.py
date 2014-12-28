@@ -71,6 +71,7 @@ class SiteBlocks(object):
     # Cache is only invalidated on block item change.
     CACHE_TIMEOUT = 31536000
     CACHE_KEY = 'siteblocks'
+
     IDX_GUEST = 0
     IDX_AUTH = 1
 
@@ -102,6 +103,7 @@ class SiteBlocks(object):
         cache.delete(self.CACHE_KEY)
 
     def get_contents_static(self, block_alias, context):
+        """Returns contents of a static block."""
 
         if 'request' not in context:
             # No use in further actions as we won't ever know current URL.
@@ -171,6 +173,7 @@ class SiteBlocks(object):
         return static_block_contents
 
     def get_contents_dynamic(self, block_alias, context):
+        """Returns contents of a dynamic block."""
         dynamic_block = get_dynamic_blocks().get(block_alias, [])
         if not dynamic_block:
             return ''
@@ -179,6 +182,7 @@ class SiteBlocks(object):
         return dynamic_block(block_alias=block_alias, block_context=context)
 
     def get(self, block_alias, context):
+        """Main method returning block contents (static or dynamic)."""
         contents = []
 
         dynamic_block_contents = self.get_contents_dynamic(block_alias, context)
