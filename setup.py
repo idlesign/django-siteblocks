@@ -16,7 +16,7 @@ setup(
     long_description=readme,
     license='BSD 3-Clause License',
 
-    author="Igor 'idle sign' Starikov",
+    author='Igor `idle sign` Starikov',
     author_email='idlesign@yandex.ru',
 
     packages=['siteblocks'],
@@ -24,7 +24,7 @@ setup(
     zip_safe=False,
 
     classifiers=[
-	    'Development Status :: 4 - Beta',
+        'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
         'Framework :: Django',
         'Intended Audience :: Developers',
