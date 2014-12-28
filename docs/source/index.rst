@@ -26,6 +26,7 @@ Table of Contents
 
     quickstart
     dynamic
+    thirdparty
 
 
 Get involved into django-siteblocks

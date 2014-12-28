@@ -2,6 +2,11 @@ django-siteblocks changelog
 ===========================
 
 
+Unreleased
+----------
++ Implemented language dependent blocks support, added `SITEBLOCKS_I18N_SUPPORT` setting.
+
+
 v0.3.0
 ------
 + Django 1.7 ready.

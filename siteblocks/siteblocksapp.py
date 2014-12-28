@@ -8,9 +8,16 @@ from django.utils.translation import get_language
 from django.db.models import signals
 
 from .models import Block
+from .settings import I18N_SUPPORT
 
 
-# Holds dynamic blocks.
+if I18N_SUPPORT:
+    cache_get_key = lambda block_alias: '%s:%s' % (block_alias, get_language())
+else:
+    cache_get_key = lambda block_alias: block_alias
+
+
+# Contains dynamic blocks.
 _DYNAMIC_BLOCKS = defaultdict(list)
 
 
@@ -86,14 +93,6 @@ class SiteBlocks(object):
         """Returns cache entry parameter value by its name."""
         return self._cache.get(key, False)
 
-    def _cache_make_name(self, block_alias):
-        """Returns an appropriate name for a cache entry."""
-        # Appending the current language is required for multilingual
-        # web sites that use different translations for the content.
-        # See https://github.com/idlesign/django-siteblocks/issues/1
-        # for details.
-        return '%s:%s' % (block_alias, get_language())
-
     def _cache_set(self, key, value):
         """Replaces entire cache entry parameter data by its name with new data."""
         self._cache[key] = value
@@ -123,7 +122,7 @@ class SiteBlocks(object):
 
         self._cache_init()
 
-        cache_entry_name = self._cache_make_name(block_alias)
+        cache_entry_name = cache_get_key(block_alias)
 
         siteblocks_static = self._cache_get(cache_entry_name)
         if not siteblocks_static:
@@ -149,6 +148,7 @@ class SiteBlocks(object):
                     siteblocks_static[self.IDX_AUTH][url_re].append(block.contents)
 
             self._cache_set(cache_entry_name, siteblocks_static)
+
         self._cache_save()
 
         user = context['request'].user
