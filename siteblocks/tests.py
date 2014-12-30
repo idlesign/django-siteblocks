@@ -3,20 +3,22 @@ from random import choice
 from django.utils import unittest
 from django import template
 from django.core import urlresolvers
+from django.conf.urls import patterns, url, include
+from django.template import Template, Context, TemplateSyntaxError
 
 from siteblocks.models import Block
 from siteblocks.siteblocksapp import SiteBlocks, SiteBlocksError, register_dynamic_block
 
-from django.conf.urls import patterns, url, include
-
 
 class MockRequest(object):
+
     def __init__(self, path, user_authorized):
         self.path = path
         self.user = MockUser(user_authorized)
 
 
 class MockUser(object):
+
     def __init__(self, authorized):
         self.authorized = authorized
 
@@ -56,6 +58,25 @@ def get_quote(**kwargs):
     return choice(QUOTES)
 
 
+class TemplateTagsTest(unittest.TestCase):
+
+    def test_siteblock(self):
+        context = Context()
+        context['request'] = MockRequest('/', user_authorized=False)
+
+        result = Template('{% load siteblocks %}{% siteblock "myblock" %}').render(context)
+        self.assertEqual(result, '')
+
+        b1 = Block(alias='myblock', url='*', contents='my_block_here')
+        b1.save(force_insert=True)
+
+        result = Template('{% load siteblocks %}{% siteblock "myblock" %}').render(context)
+        self.assertEqual(result, 'my_block_here')
+
+        Template('{% load siteblocks %}{% siteblock "myblock" as somevar %}').render(context)
+        self.assertEqual(context.get('somevar'), 'my_block_here')
+
+
 class TreeItemModelTest(unittest.TestCase):
 
     @classmethod
@@ -91,14 +112,6 @@ class TreeItemModelTest(unittest.TestCase):
 
         cls.b10 = Block(alias='access_filter', url='*', contents='afilter_guest', access_guest=True)
         cls.b10.save(force_insert=True)
-
-        # set urlconf to one from test
-        cls.old_urlconf = urlresolvers.get_urlconf()
-        urlresolvers.set_urlconf('siteblocks.tests')
-
-    @classmethod
-    def tearDownClass(cls):
-        urlresolvers.set_urlconf(cls.old_urlconf)
 
     def test_static_notalias(self):
 
