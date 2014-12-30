@@ -7,7 +7,7 @@ from django.conf import settings, global_settings
 
 def main():
     current_dir = os.path.dirname(__file__)
-    app_name = os.path.basename(current_dir)
+    app_name = 'siteblocks'
     sys.path.insert(0, os.path.join(current_dir, '..'))
 
     if not settings.configured:
