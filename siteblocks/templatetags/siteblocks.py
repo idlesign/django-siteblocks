@@ -25,7 +25,9 @@ def siteblock(parser, token):
     tokens_num = len(tokens)
 
     if tokens_num not in (2, 4):
-        raise template.TemplateSyntaxError("%r tag requires two or four arguments. E.g.: {%% siteblock \"myblock\" %%} or {%% siteblock \"myblock\" as myvar %%}." % tokens[0])
+        raise template.TemplateSyntaxError(
+            '%r tag requires two or four arguments. '
+            'E.g.: {%% siteblock "myblock" %%} or {%% siteblock "myblock" as myvar %%}.' % tokens[0])
 
     block_alias = parser.compile_filter(tokens[1])
     as_var = None

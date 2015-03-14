@@ -2,12 +2,11 @@ from random import choice
 
 from django.utils import unittest
 from django import template
-from django.core import urlresolvers
 from django.conf.urls import patterns, url, include
-from django.template import Template, Context, TemplateSyntaxError
+from django.template import Template, Context
 
 from siteblocks.models import Block
-from siteblocks.siteblocksapp import SiteBlocks, SiteBlocksError, register_dynamic_block
+from siteblocks.siteblocksapp import SiteBlocks, register_dynamic_block
 
 
 class MockRequest(object):

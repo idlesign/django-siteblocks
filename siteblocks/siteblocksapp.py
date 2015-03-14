@@ -43,7 +43,7 @@ def register_dynamic_block(alias, callable):
             quotes = [  # From Terry Pratchett's Discworld novels.
                 'Ripples of paradox spread out across the sea of causality.',
                 'Early to rise, early to bed, makes a man healthy, wealthy and dead.',
-                'Granny had nothing against fortune-telling provided it was done badly by people with no talent for it.',
+                'Granny had nothing against fortune-telling provided it was done badly by people with no talent for it.'
                 'Take it from me, there\'s nothing more terrible than someone out to do the world a favour.',
                 'The duke had a mind that ticked like a clock and, like a clock, it regularly went cuckoo.',
                 'Most gods find it hard to walk and think at the same time.',
@@ -197,8 +197,3 @@ class SiteBlocks(object):
             return ''
 
         return choice(contents)
-
-
-class SiteBlocksError(Exception):
-    """Exception class for siteblocks application."""
-    pass
