@@ -1,4 +1,5 @@
 from django import template
+from django.template.base import FilterExpression
 
 from ..siteblocksapp import SiteBlocks
 
@@ -46,7 +47,7 @@ class siteblockNode(template.Node):
         
     def render(self, context):
         block_alias = self.block_alias
-        if isinstance(self.block_alias, template.FilterExpression):
+        if isinstance(self.block_alias, FilterExpression):
             block_alias = block_alias.resolve(context)
 
         contents = siteblocks.get(block_alias, context)
