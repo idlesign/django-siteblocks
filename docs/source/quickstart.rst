@@ -6,6 +6,8 @@ Getting started
 * Add the **siteblocks** application to INSTALLED_APPS in your settings file (usually 'settings.py').
 * Use ``> python manage.py syncdb`` command to install app tables int DB (``> python manage.py migrate`` for Django 1.7+)
 * Make sure `TEMPLATE_CONTEXT_PROCESSORS` in your settings file has `django.core.context_processors.request` if you want to use static blocks created in Django Admin.
+  For Django 1.8+: `django.template.context_processors.request` should be defined in ``TEMPLATES/OPTIONS/context_processors``.
+
 
 .. warning::
 
