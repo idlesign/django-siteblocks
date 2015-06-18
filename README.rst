@@ -2,20 +2,23 @@ django-siteblocks
 =================
 http://github.com/idlesign/django-siteblocks
 
-.. image:: https://badge.fury.io/py/django-siteblocks.png
-    :target: http://badge.fury.io/py/django-siteblocks
+.. image:: https://img.shields.io/pypi/v/django-siteblocks.svg
+    :target: https://pypi.python.org/pypi/django-siteblocks
 
-.. image:: https://pypip.in/d/django-siteblocks/badge.png
-        :target: https://crate.io/packages/django-siteblocks
+.. image:: https://img.shields.io/pypi/dm/django-siteblocks.svg
+    :target: https://pypi.python.org/pypi/django-siteblocks
 
-.. image:: https://coveralls.io/repos/idlesign/django-siteblocks/badge.png
+.. image:: https://img.shields.io/pypi/l/django-siteblocks.svg
+    :target: https://pypi.python.org/pypi/django-siteblocks
+
+.. image:: https://img.shields.io/coveralls/idlesign/django-siteblocks/master.svg
     :target: https://coveralls.io/r/idlesign/django-siteblocks
 
-.. image:: https://travis-ci.org/idlesign/django-siteblocks.svg?branch=master
+.. image:: https://img.shields.io/travis/idlesign/django-siteblocks/master.svg
     :target: https://travis-ci.org/idlesign/django-siteblocks
 
-.. image:: https://landscape.io/github/idlesign/django-siteblocks/master/landscape.svg?style=plastic
-   :target: https://landscape.io/github/idlesign/django-siteblocks/master
+.. image:: https://img.shields.io/codeclimate/github/idlesign/django-siteblocks.svg
+   :target: https://codeclimate.com/github/idlesign/django-siteblocks
 
 
 What's that
