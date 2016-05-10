@@ -153,8 +153,8 @@ class SiteBlocks(object):
 
         self._cache_save()
 
-        user = context['request'].user
-        if user.is_authenticated():
+        user = getattr(context['request'], 'user', None)
+        if user and user.is_authenticated():
             lookup_area = siteblocks_static[self.IDX_AUTH]
         else:
             lookup_area = siteblocks_static[self.IDX_GUEST]
