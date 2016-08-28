@@ -2,9 +2,10 @@ django-siteblocks changelog
 ===========================
 
 
-Unreleased
-----------
+v0.5.1
+------
 * Fix AttributeError exception if request doesn't have .user.
+* Django 1.10 compatibility ensured.
 
 
 v0.5.0
