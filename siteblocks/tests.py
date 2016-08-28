@@ -1,12 +1,18 @@
+import unittest
 from random import choice
 
-from django.utils import unittest
-from django import template
-from django.conf.urls import patterns, url, include
+from django import template, VERSION
+from django.conf.urls import  url, include
 from django.template import Template, Context
 
 from siteblocks.models import Block
 from siteblocks.siteblocksapp import SiteBlocks, register_dynamic_block
+
+try:
+    from django.conf.urls import patterns
+
+except ImportError:
+    patterns = None
 
 
 class MockRequest(object):
@@ -25,19 +31,37 @@ class MockUser(object):
         return self.authorized
 
 
+def get_mock_patterns():
+    url_ = url(r'^my_another_named_url/$', lambda r: None, name='url')
+
+    if patterns:
+        return patterns('', url_)
+
+    return [url_]
+
+
 class MockUrlconfModule(object):
 
-    urlpatterns = patterns('', url(r'^my_another_named_url/$', lambda r: None, name='url'),)
+    urlpatterns = get_mock_patterns()
 
 
-urlpatterns = patterns('',
+urlpatterns = [
     url(r'^my_named_url/$', lambda r: None, name='named_url'),
     url(r'^namespace/', include((MockUrlconfModule, None, 'namespaced'))),
-)
+]
+
+if VERSION < (1, 10):
+    urlpatterns.insert(0, '')
+    urlpatterns = patterns(*urlpatterns)
 
 
 def get_mock_context(app=None, path=None, user_authorized=False):
-    ctx = template.Context({'request': MockRequest(path, user_authorized)}, current_app=app)
+    kwargs = {}
+
+    if VERSION < (1, 10):
+        kwargs['current_app'] = app
+
+    ctx = template.Context({'request': MockRequest(path, user_authorized)}, **kwargs)
     return ctx
 
 
