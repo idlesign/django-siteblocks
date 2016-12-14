@@ -4,13 +4,13 @@ include CHANGELOG
 include AUTHORS
 
 include docs/Makefile
-recursive-include docs .rst
-recursive-include docs .py
+recursive-include docs *.rst
+recursive-include docs *.py
 
 recursive-include siteblocks/locale *
 
-recursive-include siteblocks/migrations .py
-recursive-include siteblocks/south_migrations .py
+recursive-include siteblocks/migrations *.py
+recursive-include siteblocks/south_migrations *.py
 recursive-include siteblocks/templatetags *
 
 recursive-exclude * __pycache__
