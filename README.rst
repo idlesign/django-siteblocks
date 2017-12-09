@@ -14,8 +14,8 @@ http://github.com/idlesign/django-siteblocks
 .. image:: https://img.shields.io/travis/idlesign/django-siteblocks/master.svg
     :target: https://travis-ci.org/idlesign/django-siteblocks
 
-.. image:: https://img.shields.io/codeclimate/github/idlesign/django-siteblocks.svg
-   :target: https://codeclimate.com/github/idlesign/django-siteblocks
+.. image:: https://landscape.io/github/idlesign/django-siteblocks/master/landscape.svg?style=flat
+   :target: https://landscape.io/github/idlesign/django-siteblocks/master
 
 
 What's that
