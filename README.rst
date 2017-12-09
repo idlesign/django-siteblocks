@@ -5,9 +5,6 @@ http://github.com/idlesign/django-siteblocks
 .. image:: https://img.shields.io/pypi/v/django-siteblocks.svg
     :target: https://pypi.python.org/pypi/django-siteblocks
 
-.. image:: https://img.shields.io/pypi/dm/django-siteblocks.svg
-    :target: https://pypi.python.org/pypi/django-siteblocks
-
 .. image:: https://img.shields.io/pypi/l/django-siteblocks.svg
     :target: https://pypi.python.org/pypi/django-siteblocks
 
