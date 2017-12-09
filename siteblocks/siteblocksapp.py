@@ -3,7 +3,12 @@ from collections import defaultdict
 from random import choice
 
 from django.core.cache import cache
-from django.core.urlresolvers import resolve, Resolver404
+
+try:
+    from django.urls import resolve, Resolver404
+except ImportError:
+    from django.core.urlresolvers import resolve, Resolver404
+
 from django.utils.translation import get_language
 from django.db.models import signals
 

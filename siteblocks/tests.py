@@ -2,7 +2,7 @@ import unittest
 from random import choice
 
 from django import template, VERSION
-from django.conf.urls import  url, include
+from django.conf.urls import url, include
 from django.template import Template, Context
 
 from siteblocks.models import Block
@@ -47,8 +47,13 @@ class MockUrlconfModule(object):
 
 urlpatterns = [
     url(r'^my_named_url/$', lambda r: None, name='named_url'),
-    url(r'^namespace/', include((MockUrlconfModule, None, 'namespaced'))),
 ]
+
+if VERSION < (2,0):
+    urlpatterns.append(url(r'^namespace/', include((MockUrlconfModule, None, 'namespaced'))))
+else:
+    urlpatterns.append(url(r'^namespace/', include((MockUrlconfModule, 'app'), namespace='namespaced')))
+
 
 if VERSION < (1, 10):
     urlpatterns.insert(0, '')
