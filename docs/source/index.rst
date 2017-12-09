@@ -12,10 +12,9 @@ that could be rendered in certain places on site pages. These blocks are address
 Requirements
 ------------
 
-1. Python 2.7+ or 3.3+
-2. Django 1.4+
+1. Python 2.7+ or 3.4+
+2. Django 1.7+
 3. Django Admin contrib enabled (optional)
-4. South 1.0+ (for automatic DB migrations; not required for Django 1.7+)
 
 
 Table of Contents

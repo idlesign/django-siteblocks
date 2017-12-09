@@ -2,6 +2,11 @@ django-siteblocks changelog
 ===========================
 
 
+Unreleased
+----------
+* Dropped support for Python<3.4 and Django<1.7.
+
+
 v0.5.2
 ------
 * Package distribution fix.
