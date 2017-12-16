@@ -2,8 +2,8 @@ django-siteblocks changelog
 ===========================
 
 
-Unreleased
-----------
+v0.6.0
+------
 + Django 2.0 basic compatibility.
 * Dropped support for Python<3.4 and Django<1.7.
 
