@@ -2,6 +2,7 @@ import re
 from collections import defaultdict
 from random import choice
 
+from django import VERSION
 from django.core.cache import cache
 
 try:
@@ -20,6 +21,9 @@ if I18N_SUPPORT:
     cache_get_key = lambda block_alias: '%s:%s' % (block_alias, get_language())
 else:
     cache_get_key = lambda block_alias: block_alias
+
+
+DJANGO_2 = VERSION >= (2, 0, 0)
 
 
 # Contains dynamic blocks.
@@ -159,7 +163,13 @@ class SiteBlocks(object):
         self._cache_save()
 
         user = getattr(context['request'], 'user', None)
-        if user and user.is_authenticated():
+
+        is_authenticated = getattr(user, 'is_authenticated', False)
+
+        if not DJANGO_2:
+            is_authenticated = is_authenticated()
+
+        if is_authenticated:
             lookup_area = siteblocks_static[self.IDX_AUTH]
         else:
             lookup_area = siteblocks_static[self.IDX_GUEST]

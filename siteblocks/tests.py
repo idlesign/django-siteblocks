@@ -31,6 +31,11 @@ class MockUser(object):
         return self.authorized
 
 
+if VERSION >= (2, 0):
+
+    MockUser.is_authenticated = property(lambda self: self.authorized)
+
+
 def get_mock_patterns():
     url_ = url(r'^my_another_named_url/$', lambda r: None, name='url')
 

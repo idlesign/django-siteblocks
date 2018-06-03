@@ -2,6 +2,11 @@ django-siteblocks changelog
 ===========================
 
 
+Unreleased
+----------
+* Improved Django 2 compatibility.
+
+
 v0.6.0
 ------
 + Django 2.0 basic compatibility.
