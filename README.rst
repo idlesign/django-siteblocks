@@ -2,6 +2,12 @@ django-siteblocks
 =================
 http://github.com/idlesign/django-siteblocks
 
+.. image:: https://idlesign.github.io/lbc/py2-lbc.svg
+   :target: https://idlesign.github.io/lbc/
+   :alt: LBC Python 2
+
+----
+
 .. image:: https://img.shields.io/pypi/v/django-siteblocks.svg
     :target: https://pypi.python.org/pypi/django-siteblocks
 
