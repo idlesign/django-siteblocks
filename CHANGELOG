@@ -4,7 +4,7 @@ django-siteblocks changelog
 
 Unreleased
 ----------
-! Dropped QA for Python 2.
+! Dropped QA for Python 2, Django 1.7.
 + Add Django 3.0 compatibility.
 
 
