@@ -68,6 +68,7 @@ Block rendering
 Use ``siteblocks`` tag to render block contents where you need it.
 
 .. code-block:: html
+
     {% load siteblocks %}
 
     <div class="quote">
