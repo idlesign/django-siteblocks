@@ -3,30 +3,23 @@ from collections import defaultdict
 from random import choice
 from typing import Callable, Dict, List
 
-from django import VERSION
 from django.core.cache import cache
-from django.template import Context
-
-try:
-    from django.urls import resolve, Resolver404
-except ImportError:
-    from django.core.urlresolvers import resolve, Resolver404
-
-from django.utils.translation import get_language
 from django.db.models import signals
+from django.template import Context
+from django.urls import resolve, Resolver404
+from django.utils.translation import get_language
 
 from .models import Block
 from .settings import I18N_SUPPORT
 
-
 if I18N_SUPPORT:
-    cache_get_key = lambda block_alias: f'{block_alias}:{get_language()}'
+
+    def cache_get_key(block_alias: str) -> str:
+        return f'{block_alias}:{get_language()}'
 
 else:
-    cache_get_key = lambda block_alias: block_alias
-
-
-DJANGO_2 = VERSION >= (2, 0, 0)
+    def cache_get_key(block_alias: str) -> str:
+        return block_alias
 
 
 # Contains dynamic blocks.
@@ -183,11 +176,7 @@ class SiteBlocks:
         self._cache_save()
 
         user = getattr(context['request'], 'user', None)
-
         is_authenticated = getattr(user, 'is_authenticated', False)
-
-        if not DJANGO_2:
-            is_authenticated = is_authenticated()
 
         lookup_area = siteblocks_static[idx_auth if is_authenticated else idx_guest]
 

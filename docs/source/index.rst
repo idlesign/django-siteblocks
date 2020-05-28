@@ -19,7 +19,7 @@ Requirements
 ----
 
 1. Python 3.6+
-2. Django 1.8+
+2. Django 2.0+
 3. Django Admin contrib enabled (optional)
 
 
