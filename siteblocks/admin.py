@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from .models import Block
 
@@ -7,9 +7,13 @@ from .models import Block
 class BlockAdmin(admin.ModelAdmin):
 
     list_display = ('alias', 'description', 'url', 'hidden', 'access_loggedin', 'access_guest')
+
     search_fields = ['alias', 'url']
+
     list_filter = ['hidden']
+
     ordering = ['alias']
+
     fieldsets = (
         (_('Basic settings'), {
             'fields': ('alias', 'url', 'contents',)

@@ -20,7 +20,7 @@ def get_quote(**kwargs):
     return choice(QUOTES)
 
 
-class TestTemplateTags(object):
+class TestTemplateTags:
 
     def test_siteblock(self, template_render_tag, template_context):
 
@@ -37,7 +37,7 @@ class TestTemplateTags(object):
         assert context.get('somevar') == 'my_block_here'
 
 
-class TestTreeItemModel(object):
+class TestTreeItemModel:
 
     @classmethod
     def setup_method(cls):

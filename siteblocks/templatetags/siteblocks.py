@@ -1,5 +1,5 @@
 from django import template
-from django.template.base import FilterExpression
+from django.template.base import FilterExpression, Parser, Token
 
 from ..siteblocksapp import SiteBlocks
 
@@ -10,7 +10,7 @@ siteblocks = SiteBlocks()
 
 
 @register.tag
-def siteblock(parser, token):
+def siteblock(parser: Parser, token: Token):
     """Two notation types are acceptable:
 
         1. Two arguments:
@@ -27,12 +27,13 @@ def siteblock(parser, token):
 
     if tokens_num not in (2, 4):
         raise template.TemplateSyntaxError(
-            '%r tag requires two or four arguments. '
-            'E.g.: {%% siteblock "myblock" %%} or {%% siteblock "myblock" as myvar %%}.' % tokens[0])
+            f'{tokens[0]} tag requires two or four arguments. '
+            'E.g.: {%% siteblock "myblock" %%} or {%% siteblock "myblock" as myvar %%}.')
 
     block_alias = parser.compile_filter(tokens[1])
     as_var = None
     tokens = tokens[2:]
+
     if len(tokens) >= 2 and tokens[-2] == 'as':
         as_var = tokens[-1]
 

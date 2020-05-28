@@ -22,7 +22,7 @@ def get_mock_patterns():
     return [url_]
 
 
-class MockUrlconfModule(object):
+class MockUrlconfModule:
 
     urlpatterns = get_mock_patterns()
 
