@@ -75,55 +75,55 @@ class TestTreeItemModel:
 
     def test_static_notalias(self, template_context):
 
-        contents = self.siteblocks.get('notalias', template_context({}, '/root/'))
+        contents = self.siteblocks.get('notalias', template_context({}, request='/root/'))
         assert contents == ''
 
     def test_static_asterisk(self, template_context):
 
-        contents = self.siteblocks.get(self.b1.alias, template_context({}, '/root/'))
+        contents = self.siteblocks.get(self.b1.alias, template_context({}, request='/root/'))
         assert contents == self.b1.contents
 
-        contents = self.siteblocks.get(self.b3.alias, template_context({}, '/root/'))
+        contents = self.siteblocks.get(self.b3.alias, template_context({}, request='/root/'))
         assert contents in [self.b3.contents, self.b4.contents]
 
     def test_static_multiple(self, template_context):
 
-        contents = self.siteblocks.get(self.b5.alias, template_context({}, '/news/1'))
+        contents = self.siteblocks.get(self.b5.alias, template_context({}, request='/news/1'))
         assert contents == self.b5.contents
 
-        contents = self.siteblocks.get(self.b5.alias, template_context({}, '/news/2'))
+        contents = self.siteblocks.get(self.b5.alias, template_context({}, request='/news/2'))
         assert contents == self.b5.contents
 
-        contents = self.siteblocks.get(self.b5.alias, template_context({}, '/new/2'))
+        contents = self.siteblocks.get(self.b5.alias, template_context({}, request='/new/2'))
         assert contents == ''
 
     def test_static_regexp(self, template_context):
 
-        contents = self.siteblocks.get(self.b5.alias, template_context({}, '/grooves'))
+        contents = self.siteblocks.get(self.b5.alias, template_context({}, request='/grooves'))
         assert contents == self.b6.contents
 
-        contents = self.siteblocks.get(self.b5.alias, template_context({}, '/groves'))
+        contents = self.siteblocks.get(self.b5.alias, template_context({}, request='/groves'))
         assert contents == self.b6.contents
 
-        contents = self.siteblocks.get(self.b5.alias, template_context({}, '/groooves'))
+        contents = self.siteblocks.get(self.b5.alias, template_context({}, request='/groooves'))
         assert contents == ''
 
     def test_static_namedview(self, template_context):
 
-        contents = self.siteblocks.get(self.b7.alias, template_context({}, '/my_named_url/'))
+        contents = self.siteblocks.get(self.b7.alias, template_context({}, request='/my_named_url/'))
         assert contents == self.b7.contents
 
-        contents = self.siteblocks.get(self.b8.alias, template_context({}, '/namespace/my_another_named_url/'))
+        contents = self.siteblocks.get(self.b8.alias, template_context({}, request='/namespace/my_another_named_url/'))
         assert contents == self.b8.contents
 
     def test_dynamic(self, template_context):
         register_dynamic_block('quotes', get_quote)
-        contents = self.siteblocks.get('quotes', template_context({}, '/somewhere/'))
+        contents = self.siteblocks.get('quotes', template_context({}, request='/somewhere/'))
         assert contents in QUOTES
 
     def test_static_access_filters(self, template_context, user_create):
-        contents = self.siteblocks.get(self.b9.alias, template_context({}, '/some/'))
+        contents = self.siteblocks.get(self.b9.alias, template_context({}, request='/some/'))
         assert contents == self.b10.contents
 
-        contents = self.siteblocks.get(self.b9.alias, template_context({}, '/some/', user=user_create()))
+        contents = self.siteblocks.get(self.b9.alias, template_context({}, request='/some/', user=user_create()))
         assert contents == self.b9.contents
