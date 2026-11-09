@@ -7,3 +7,4 @@ class SiteblocksConfig(AppConfig):
 
     name = 'siteblocks'
     verbose_name = _('Site Blocks')
+    default_auto_field = 'django.db.models.AutoField'

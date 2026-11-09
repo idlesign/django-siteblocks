@@ -1,13 +1,10 @@
-Thirdparty applications support
-===============================
+# Thirdparty applications support
 
 Here belongs some notes on thirdparty Django applications support in `siteblocks`.
 
+## django-modeltranslation
 
-django-modeltranslation
------------------------
-
-https://pypi.python.org/pypi/django-modeltranslation/
+<https://pypi.python.org/pypi/django-modeltranslation/>
 
 You can use `modeltranslation` to make your site blocks language dependent.
 

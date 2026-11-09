@@ -1,18 +1,13 @@
-django-siteblocks authors
-=========================
+# django-siteblocks authors
 
 Created by Igor `idle sign` Starikov.
 
+## Contributors
 
-Contributors
-------------
+* aruseni <https://github.com/aruseni>
+* Arkadiy Korotaev <https://github.com/koriaf>
 
-aruseni <https://github.com/aruseni>
-Arkadiy Korotaev <https://github.com/koriaf>
+## Translators
 
-
-Translators
------------
-
-Russian: Igor Starikov <https://www.transifex.com/accounts/profile/idlesign/>
-French: PatrickHetu <https://www.transifex.com/accounts/profile/PatrickHetu/>
+* Russian: Igor Starikov <https://www.transifex.com/accounts/profile/idlesign/>
+* French: PatrickHetu <https://www.transifex.com/accounts/profile/PatrickHetu/>

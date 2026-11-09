@@ -1,91 +1,75 @@
-django-siteblocks changelog
-===========================
+# django-siteblocks changelog
 
+### v1.2.1 [2021-12-18]
 
-v1.2.1 [2021-12-18]
--------------------
-* Django 4.0 compatibility improved.
+* ** Django 4.0 compatibility improved.
 
+### v1.2.0 [2020-05-28]
 
-v1.2.0 [2020-05-28]
--------------------
-! Dropped support for Python 2 and 3.5.
-* Dropped support for Django<2.0.
+* !! Dropped support for Python 2 and 3.5.
+* ** Dropped support for Django<2.0.
 
+### v1.1.0 [2019-12-08]
 
-v1.1.0 [2019-12-08]
--------------------
-! Dropped QA for Python 2, Django 1.7.
-+ Add Django 3.0 compatibility.
+* !! Dropped QA for Python 2, Django 1.7.
+* ++ Add Django 3.0 compatibility.
 
+### v1.0.0
 
-v1.0.0
-------
-! Dropped QA for Python 3.4.
-* No functional changes. Celebrating 1.0.0.
+* !! Dropped QA for Python 3.4.
+* ** No functional changes. Celebrating 1.0.0.
 
+### v0.6.1
 
-v0.6.1
-------
-* Improved Django 2 compatibility.
+* ** Improved Django 2 compatibility.
 
+### v0.6.0
 
-v0.6.0
-------
-+ Django 2.0 basic compatibility.
-* Dropped support for Python<3.4 and Django<1.7.
+* ++ Django 2.0 basic compatibility.
+* ** Dropped support for Python<3.4 and Django<1.7.
 
+### v0.5.2
 
-v0.5.2
-------
-* Package distribution fix.
+* ** Package distribution fix.
 
+### v0.5.1
 
-v0.5.1
-------
-* Fix AttributeError exception if request doesn't have .user.
-* Django 1.10 compatibility ensured.
+* ** Fix AttributeError exception if request doesn't have .user.
+* ** Django 1.10 compatibility ensured.
 
+### v0.5.0
 
-v0.5.0
-------
-+ Adapted for Django 1.8.
+* ++ Adapted for Django 1.8.
 
+### v0.4.0
 
-v0.4.0
-------
-+ Implemented language dependent blocks support, added `SITEBLOCKS_I18N_SUPPORT` setting.
+* ++ Implemented language dependent blocks support, added `SITEBLOCKS_I18N_SUPPORT` setting.
 
+### v0.3.0
 
-v0.3.0
-------
-+ Django 1.7 ready.
-+ Implemented simple access control for static blocks.
-+ Added French loco.
+* ++ Django 1.7 ready.
+* ++ Implemented simple access control for static blocks.
+* ++ Added French loco.
 
+### v0.2.1
 
-v0.2.1
-------
-* Fixed import for Admin contrib.
-* Fixed `as variable` template tag clause.
+* ** Fixed import for Admin contrib.
+* ** Fixed `as variable` template tag clause.
 
+### v0.2.0
 
-v0.2.0
-------
-+ Added Python 3 support.
-+ Added South support.
-+ Added Django Cache framework support.
-+ Added dynamic blocks support.
-+ Added named URLs support in static blocks URLs.
-+ Added block content randomizer.
+* ++ Added Python 3 support.
+* ++ Added South support.
+* ++ Added Django Cache framework support.
+* ++ Added dynamic blocks support.
+* ++ Added named URLs support in static blocks URLs.
+* ++ Added block content randomizer.
 
+### v0.1.1
 
-v0.1.1
-------
-+ Now PyPI ready.
-* Module imports.
+* ++ Now PyPI ready.
+* ** Module imports.
 
+### v0.1.0
 
-v0.1.0
-------
-+ Basic siteblocks functionality.
+* ++ Basic siteblocks functionality.

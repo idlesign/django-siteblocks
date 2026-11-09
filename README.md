@@ -1,22 +1,12 @@
-django-siteblocks
-=================
-http://github.com/idlesign/django-siteblocks
+# django-siteblocks
 
-.. image:: https://img.shields.io/pypi/v/django-siteblocks.svg
-    :target: https://pypi.python.org/pypi/django-siteblocks
+<https://github.com/idlesign/django-siteblocks>
 
-.. image:: https://img.shields.io/pypi/l/django-siteblocks.svg
-    :target: https://pypi.python.org/pypi/django-siteblocks
+[![release](https://img.shields.io/pypi/v/django-siteblocks.svg)](https://pypi.python.org/pypi/django-siteblocks)
+[![lic](https://img.shields.io/pypi/l/django-siteblocks.svg)](https://pypi.python.org/pypi/django-siteblocks)
+[![coverage](https://img.shields.io/coveralls/idlesign/django-siteblocks/master.svg)](https://coveralls.io/r/idlesign/django-siteblocks)
 
-.. image:: https://img.shields.io/coveralls/idlesign/django-siteblocks/master.svg
-    :target: https://coveralls.io/r/idlesign/django-siteblocks
-
-.. image:: https://img.shields.io/travis/idlesign/django-siteblocks/master.svg
-    :target: https://travis-ci.org/idlesign/django-siteblocks
-
-
-What's that
------------
+## What's that
 
 *django-siteblocks is a reusable application for Django to build blocks of static or dynamic data that could be used in templates.*
 
@@ -25,52 +15,47 @@ that could be rendered in certain places on site pages. These blocks are address
 
 The following siteblock types are supported:
 
-Static
-~~~~~~
+### Static
+
 Those are defined using Django Admin contrib and are linked to certain URLs.
 
 This allows different siteblock contents on different URLs. Just go to admin and add some blocks.
 
-Dynamic
-~~~~~~~
+### Dynamic
 
 Those are ordinary Python functions registered as siteblocks returning contents.
 
 This allows complex logic to build siteblock contents. Let's make a block with a random quote from Pratchett:
 
-.. code-block:: python
+```python
+from random import choice
 
-        from random import choice
-
-        from siteblocks.siteblocksapp import register_dynamic_block
-
-
-        def get_quote(**kwargs):
-            quotes = [
-                'Early to rise, early to bed, makes a man healthy, wealthy and dead.',
-                'The duke had a mind that ticked like a clock and, like a clock, it regularly went cuckoo.',
-                'Speak softly and employ a huge man with a crowbar.',
-            ]
-            return choice(quotes)
-
-        register_dynamic_block('quote', get_quote)
+from siteblocks.siteblocksapp import register_dynamic_block
 
 
-Block rendering
----------------
+def get_quote(**kwargs):
+    quotes = [
+        'Early to rise, early to bed, makes a man healthy, wealthy and dead.',
+        'The duke had a mind that ticked like a clock and, like a clock, it regularly went cuckoo.',
+        'Speak softly and employ a huge man with a crowbar.',
+    ]
+    return choice(quotes)
 
-Use ``siteblocks`` tag to render block contents where you need it.
+register_dynamic_block('quote', get_quote)
+```
 
-.. code-block:: html
+## Block rendering
 
-    {% load siteblocks %}
+Use `siteblocks` tag to render block contents where you need it.
 
-    <div class="quote">
-        {% siteblock "quote" %}
-    </div>
+```html
+{% load siteblocks %}
 
+<div class="quote">
+    {% siteblock "quote" %}
+</div>
+```
 
-Documentation
--------------
+## Documentation
 
-http://django-siteblocks.readthedocs.org/
+<https://django-siteblocks.readthedocs.io/>
