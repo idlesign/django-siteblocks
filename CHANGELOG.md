@@ -1,5 +1,8 @@
 # django-siteblocks changelog
 
+### Unreleased
+* ** Fixed model/migrations drift for Block (updated help texts; id field pinned to AutoField).
+
 ### v1.2.1 [2021-12-18]
 
 * ** Django 4.0 compatibility improved.
